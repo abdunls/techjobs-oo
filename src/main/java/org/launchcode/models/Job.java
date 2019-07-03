@@ -1,5 +1,7 @@
 package org.launchcode.models;
 
+import org.launchcode.models.forms.JobForm;
+
 /**
  * Created by LaunchCode
  */
@@ -30,6 +32,9 @@ public class Job {
         positionType = aPositionType;
         coreCompetency = aSkill;
 
+    }
+
+    public static void add(JobForm jobForm) {
     }
 
     public String getName() {
