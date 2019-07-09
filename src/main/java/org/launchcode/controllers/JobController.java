@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -24,10 +26,14 @@ public class JobController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model, int id) {
 
+//        List<Integer> list = new ArrayList<>();
+//        list.add(1); // autoboxing
+//
+//        Integer val = 2; // autoboxing
+
         // TODO #1 - get the Job with the given ID and pass it into the view
         Job job = jobData.findById(id);
         model.addAttribute("job", job);
-
         return "job-detail";
     }
 
@@ -52,13 +58,11 @@ public class JobController {
         Job newJob = new Job(
                 jobForm.getName(),
                 jobData.getEmployers().findById(jobForm.getEmployerId()),
-                jobData.getEmployers().findById(jobForm.getLocationId()),
-                jobData.getEmployers().findById(jobForm.getPositionTypesId()),
-                jobData.getEmployers().findById(jobForm.getCoreCompetenciesId())
+                jobData.getLocations().findById(jobForm.getLocationId()),
+                jobData.getPositionTypes().findById(jobForm.getPositionTypesId()),
+                jobData.getCoreCompetencies().findById(jobForm.getCoreCompetenciesId())
         );
-
         jobData.add(newJob);
-        return "redirect:";
-
+        return "redirect:?id=" + newJob.getId();
     }
 }
